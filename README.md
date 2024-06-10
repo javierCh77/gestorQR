@@ -33,3 +33,5 @@ pyinstaller --onefile mostrar.py and generador.py
 ¡Power By Javier Chavarria! 🚀🎉
 
 ![image](https://github.com/javierCh77/gestorQR/assets/117025400/da193fa2-ac09-442c-9c83-d6a9b92b5c03)
+
+![Uploading image.png…]()
