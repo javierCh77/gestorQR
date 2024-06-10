@@ -5,6 +5,13 @@ from tkinter import ttk
 import qrcode
 from PIL import Image, ImageTk, ImageDraw, ImageFont  # Import ImageFont
 from datetime import datetime
+import ctypes  # Importar ctypes
+
+
+def minimizar_consola():
+    ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 6)
+# Minimizar la consola al inicio
+minimizar_consola()
 
 def generar_qr(data, filename, ip_text):
     qr = qrcode.QRCode(
