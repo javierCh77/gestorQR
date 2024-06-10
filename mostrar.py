@@ -5,98 +5,97 @@ import sys
 import ctypes 
 
 
-def minimizar_consola():
+def minimize_consola():
     ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 6)
-# Minimizar la consola al inicio
-minimizar_consola()
+minimize_consola()
 
-def obtener_imagenes_directorio(ruta_directorio):
+def get_images_directory(ruta_directorio):
     # Obtener la lista de archivos en el directorio
-    archivos = os.listdir(ruta_directorio)
+    files = os.listdir(ruta_directorio)
 
     # Filtrar los archivos para obtener solo las imágenes
-    imagenes = [archivo for archivo in archivos if archivo.lower().endswith(
+    images = [archivo for archivo in files if archivo.lower().endswith(
         (".png", ".jpg", ".jpeg", ".gif", ".bmp"))]
 
-    return imagenes
+    return images
 
 
-def cerrar_todas_las_ventanas():
-    for ventana in ventanas:
-        ventana.destroy()
+def close_all_the_windows():
+    for window in windows:
+        window.destroy()
     sys.exit()
 
 
-def mostrar_imagenes():
+def show_images():
     # Ruta del directorio donde se encuentran las imágenes
-    ruta_directorio = "imagenes"
+    directory_path = "imagenes"
 
     # Obtener la lista de imágenes en el directorio
-    imagenes = obtener_imagenes_directorio(ruta_directorio)
+    images = get_images_directory(directory_path)
 
     # Verificar si hay imágenes en el directorio
-    if imagenes:
-        # Coordenadas predefinidas para la primera ventana
-        posiciones = [(50, 450), (450, 450), (850, 450), (1250, 450)]
+    if images:
+        # Coordenadas predefinidas para la primera windows
+        positions = [(50, 450), (450, 450), (850, 450), (1250, 450)]
 
-        for i, imagen in enumerate(imagenes):
-            # Coordenadas para la ventana actual
-            pos_x, pos_y = posiciones[i]
+        for i, image in enumerate(images):
+            # Coordenadas para la windows actual
+            pos_x, pos_y = positions[i]
 
-            # Crear una nueva ventana para mostrar la imagen
-            ventana = tk.Toplevel()
-            # Utiliza el nombre de la imagen como título de la ventana
-            ventana.title(imagen)
-            ventana.geometry("300x400")  # Configura el tamaño de la ventanaasd
-            # Configura el color de fondo de la ventana
-            ventana.configure(bg="#466CF9")
-            # Hace que la ventana no sea redimensionable en ningún eje
-            ventana.resizable(False, False)
-            #ventana.attributes('-topmost', True)  # Ventana siempre al frente
-            ventana.lift()  # ventana siempre al frente
-            ventana.protocol("WM_DELETE_WINDOW", cerrar_todas_las_ventanas)
+            # Crear una nueva windows para mostrar la imagen
+            windows = tk.Toplevel()
+            # Utiliza el nombre de la imagen como título de la windows
+            windows.title(image)
+            windows.geometry("300x400")  # Configura el tamaño de la windowsasd
+            # Configura el color de fondo de la windows
+            windows.configure(bg="#466CF9")
+            # Hace que la windows no sea redimensionable en ningún eje
+            windows.resizable(False, False)
+            #windows.attributes('-topmost', True)  # windows siempre al frente
+            windows.lift()  # windows siempre al frente
+            windows.protocol("WM_DELETE_WINDOW", close_all_the_windows)
             # Cargar la imagen desde la ruta
-            imagen_ruta = os.path.join(ruta_directorio, imagen)
-            imagen_obj = Image.open(imagen_ruta)
+            image_path = os.path.join(directory_path, image)
+            imagen_obj = Image.open(image_path)
             # Redimensionar la imagen si es necesario
             imagen_obj = imagen_obj.resize((200, 200))
 
             # Convertir la imagen para mostrarla en Tkinter
-            imagen_tk = ImageTk.PhotoImage(imagen_obj)
+            image_tk = ImageTk.PhotoImage(imagen_obj)
 
-            # Crear una etiqueta para mostrar la imagen en la ventana
-            etiqueta_imagen = tk.Label(ventana, image=imagen_tk)
-            etiqueta_imagen.image = imagen_tk
-            etiqueta_imagen.pack()
+            # Crear una etiqueta para mostrar la imagen en la windows
+            label_image = tk.Label(windows, image=image_tk)
+            label_image.image = image_tk
+            label_image.pack()
 
-            # Ubicar la ventana en las coordenadas predefinidas
-            ventana.geometry(f"+{pos_x}+{pos_y}")
-            etiqueta_imagen.place(relx=0.5, rely=0.4, anchor="center")
+            # Ubicar la windows en las coordenadas predefinidas
+            windows.geometry(f"+{pos_x}+{pos_y}")
+            label_image.place(relx=0.5, rely=0.4, anchor="center")
 
             # Agregar la imagen en lugar del texto
-            imagen_ruta_logo = "logo/nslogo.png"  # Ruta de la imagen que deseas agregar
-            imagen_obj_logo = Image.open(imagen_ruta_logo)
+            image_path_logo = "logo/nslogo.png"  # Ruta de la imagen que deseas agregar
+            image_obj_logo = Image.open(image_path_logo)
             # Redimensionar la imagen si es necesario
-            imagen_obj_logo = imagen_obj_logo.resize((300, 100))
-            imagen_tk_logo = ImageTk.PhotoImage(imagen_obj_logo)
+            image_obj_logo =  image_obj_logo.resize((300, 100))
+            image_tk_logo = ImageTk.PhotoImage(image_obj_logo)
 
-            etiqueta_imagen_logo = tk.Label(ventana, image=imagen_tk_logo)
-            etiqueta_imagen_logo.image = imagen_tk_logo
-            etiqueta_imagen_logo.place(relx=0.5, rely=0.9, anchor="center")
+            label_image_logo = tk.Label(windows, image=image_tk_logo)
+            label_image_logo.image = image_tk_logo
+            label_image_logo.place(relx=0.5, rely=0.9, anchor="center")
 
     else:
         print("No se encontraron imágenes en el directorio.")
 
-    # Ejecutar el bucle principal de la ventana
-    ventana.mainloop()
+    # Ejecutar el bucle principal de la windows
+    windows.mainloop()
 
 
-# Lista para almacenar las ventanas
-ventanas = []
+# Lista para almacenar las windowss
+windows = []
 
-# Crear la ventana principal (root) y ocultarla
+# Crear la windows principal (root) y ocultarla
 root = tk.Tk()
 root.withdraw()
 
 # Mostrar las imágenes automáticamente al ejecutar el script
-mostrar_imagenes()
+show_images()
