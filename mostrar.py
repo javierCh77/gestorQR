@@ -10,13 +10,9 @@ def minimize_consola():
 minimize_consola()
 
 def get_images_directory(ruta_directorio):
-    # Obtener la lista de archivos en el directorio
     files = os.listdir(ruta_directorio)
-
-    # Filtrar los archivos para obtener solo las imágenes
     images = [archivo for archivo in files if archivo.lower().endswith(
         (".png", ".jpg", ".jpeg", ".gif", ".bmp"))]
-
     return images
 
 
@@ -27,10 +23,7 @@ def close_all_the_windows():
 
 
 def show_images():
-    # Ruta del directorio donde se encuentran las imágenes
     directory_path = "imagenes"
-
-    # Obtener la lista de imágenes en el directorio
     images = get_images_directory(directory_path)
 
     # Verificar si hay imágenes en el directorio
@@ -46,12 +39,12 @@ def show_images():
             windows = tk.Toplevel()
             # Utiliza el nombre de la imagen como título de la windows
             windows.title(image)
-            windows.geometry("300x400")  # Configura el tamaño de la windowsasd
+            windows.geometry("300x350")  # Configura el tamaño de la windowsasd
             # Configura el color de fondo de la windows
             windows.configure(bg="#466CF9")
             # Hace que la windows no sea redimensionable en ningún eje
             windows.resizable(False, False)
-            #windows.attributes('-topmost', True)  # windows siempre al frente
+            windows.attributes('-topmost', True)  # windows siempre al frente
             windows.lift()  # windows siempre al frente
             windows.protocol("WM_DELETE_WINDOW", close_all_the_windows)
             # Cargar la imagen desde la ruta
@@ -85,8 +78,6 @@ def show_images():
 
     else:
         print("No se encontraron imágenes en el directorio.")
-
-    # Ejecutar el bucle principal de la windows
     windows.mainloop()
 
 

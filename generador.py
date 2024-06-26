@@ -44,7 +44,7 @@ def read_qr():
     data_str = f'MOTO-WIFI:S:{ssid};T:{tipo};P:{password};H:{hidden};IP:{ip_address};'
     
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f'imagenes/codigo_qr_{timestamp}.png'
+    filename = f'imagenes/codigo_qr_{timestamp}.jpg'
     img = generate_qr(data_str, filename, ip_address)
     messagebox.showinfo("Texto QR", f"Contenido del QR:\n{data_str}\n\n¡QR guardado como '{filename}'!")
     # Mostrar la QR en la ventana
@@ -81,7 +81,7 @@ tk.Label(root, text="IP:").grid(row=4, column=0, padx=10, pady=10, sticky=tk.W)
 entry_ip = tk.Entry(root)
 entry_ip.grid(row=4, column=1, padx=10, pady=10, sticky=tk.EW)
 
-tk.Button(root, text="Generar QR", command=leer_qr).grid(row=5, columnspan=2, pady=10)
+tk.Button(root, text="Generar QR", command=read_qr).grid(row=5, columnspan=2, pady=10)
 
 # Etiqueta para mostrar la QR generada
 qr_label = tk.Label(root)
